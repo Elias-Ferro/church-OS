@@ -1,11 +1,15 @@
-import { Container, Divider, Paper } from "@mui/material";
+import { Box, Divider, Paper } from "@mui/material";
 import SidebarComponent from "./components/sidebar/SidebarComponent.jsx";
 import TopBarComponent from "./components/topBar/TopBarComponent.jsx";
+import { useState } from "react";
+import ChurchesContent from "./contents/ChurchesContent.jsx";
 
 function App() {
+  const [selectedContent, setSelectedContent] = useState("dashboard");
+
   return (
     <>
-      <Container
+      <Box
         sx={{
           display: "flex",
           justifyContent: "space-between",
@@ -21,7 +25,10 @@ function App() {
           gap: "10px",
         }}
       >
-        <SidebarComponent />
+        <SidebarComponent
+          selectedContent={selectedContent}
+          onSelect={setSelectedContent}
+        />
         <Paper
           sx={{
             display: "flex",
@@ -30,10 +37,10 @@ function App() {
             height: "100%",
           }}
         >
-          <TopBarComponent titlePage={"Top Bar"} />
+          <TopBarComponent titlePage={selectedContent} />
           <Divider />
 
-          <Container
+          <Box
             sx={{
               display: "flex",
               height: "100%",
@@ -45,10 +52,13 @@ function App() {
               },
             }}
           >
-            Main Content Area
-          </Container>
+            {selectedContent === "dashboard" && <div>Dashboard Content</div>}
+            {selectedContent === "igrejas" && <ChurchesContent />}
+            {selectedContent === "financeiro" && <div>Financeiro Content</div>}
+            {selectedContent === "agenda" && <div>Agenda Content</div>}
+          </Box>
         </Paper>
-      </Container>
+      </Box>
     </>
   );
 }

@@ -8,7 +8,8 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-const SidebarComponent = () => {
+const SidebarComponent = ({ selectedContent, onSelect }) => {
+
   return (
     <Paper
       sx={{
@@ -50,21 +51,33 @@ const SidebarComponent = () => {
           label="Dashboard"
           variant="contained"
           icon={<DashboardIcon />}
+          onClick={() => {
+            selectedContent !== "dashboard" && onSelect("dashboard");
+          }}
         />
         <ButtonComponent
           label="Igrejas"
           variant="contained"
           icon={<AccountBalanceIcon />}
+          onClick={() => {
+            selectedContent !== "igrejas" && onSelect("igrejas");
+          }}
         />
         <ButtonComponent
           label="Financeiro"
           variant="contained"
           icon={<AttachMoneyIcon />}
+          onClick={() => {
+            selectedContent !== "financeiro" && onSelect("financeiro");
+          }}
         />
         <ButtonComponent
           label="Agenda"
           variant="contained"
           icon={<EventAvailableIcon />}
+          onClick={() => {
+            selectedContent !== "agenda" && onSelect("agenda");
+          }}
         />
       </Container>
 
